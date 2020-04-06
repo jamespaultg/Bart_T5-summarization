@@ -1,5 +1,6 @@
 # import config
 import torch
+from flask_ngrok import run_with_ngrok
 import flask
 from flask import Flask, request, render_template
 import json
@@ -12,6 +13,8 @@ T5_PATH = 't5-base'
 # T5_PATH = 'model/t5'
 
 app = Flask(__name__)
+# ngrok for this to work in Google collab - https://medium.com/@kshitijvijay271199/flask-on-google-colab-f6525986797b
+run_with_ngrok(app)   #starts ngrok when the app is run
 bart_model = BartForConditionalGeneration.from_pretrained(BART_PATH, output_past=True)
 bart_tokenizer = BartTokenizer.from_pretrained(BART_PATH, output_past=True)
 
